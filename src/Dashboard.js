@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { getUser, getToken, removeUserSession } from "./Utils/Common";
+import { getUser, removeUserSession } from "./Utils/Common";
 import axios from "axios";
 
 function Dashboard(props) {
   const user = getUser();
-  const token = getToken();
   const country = useFormInput("");
   // handle click event of logout button
   const handleLogout = () => {
@@ -13,16 +12,9 @@ function Dashboard(props) {
   };
 
   const searchCountry = () => {
-
     setTimeout(function () {
-      const headers = {
-        "x-access-token": token,
-      };
-
       axios
-        .get("http://localhost:4001/countries/" + country.value, {
-          headers,
-        })
+        .get("/user/")
         .then((response) => {
           console.log(response);
         })
